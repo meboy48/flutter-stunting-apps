@@ -1,7 +1,5 @@
 //import 'package:stunting_apps/Model/Pengguna.dart' as prefix0;
 //mport 'package:stunting_apps/src/model/pengguna.dart';
-import 'dart:convert';
-import 'dart:io';
 
 import 'package:stunting_apps/src/model/dtanak.dart';
 import 'package:stunting_apps/src/model/profile.dart';
@@ -28,7 +26,7 @@ class ApiService {
   }
 
   Future<Pengguna> getProfiles(String username) async {
-    final response = await client.get("$baseUrl/api/pengguna/${username}");
+    final response = await client.get("$baseUrl/api/pengguna/$username");
     if (response.body.isNotEmpty) {
       return penggunaFromJson2(response.body);
     } else {
@@ -37,7 +35,7 @@ class ApiService {
   }
 
   Future<List<Dtanak>> getData(String id_anak) async {
-    final response = await client.get("$baseUrl/api/dtanak/${id_anak}");
+    final response = await client.get("$baseUrl/api/dtanak/$id_anak");
     if (response.body.isNotEmpty) {
       return dtanakFromJson(response.body);
     } else {
@@ -81,7 +79,7 @@ class ApiService {
   }
 
   Future<bool> setPass(String id, String pass) async {
-    final response = await client.put("$baseUrl/api/pengguna/${id}/${pass}");
+    final response = await client.put("$baseUrl/api/pengguna/$id/$pass");
     if (response.statusCode == 200) {
       return true;
     } else {
@@ -103,7 +101,7 @@ class ApiService {
   }
 
   Future<List<Anak>> getProfileAnak(String id_ortu) async {
-    final response = await client.get("$baseUrl/api/anak/${id_ortu}");
+    final response = await client.get("$baseUrl/api/anak/$id_ortu");
     if (response.body.isNotEmpty) {
       return anakFromJson(response.body);
     } else {
@@ -124,12 +122,6 @@ class ApiService {
     }
   }
 
-  _save(String token) async {
-    final prefs = await SharedPreferences.getInstance();
-    final key = 'token';
-    final value = token;
-    prefs.setString(key, value);
-  }
 
   read() async {
     final prefs = await SharedPreferences.getInstance();

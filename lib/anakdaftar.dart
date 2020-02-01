@@ -323,14 +323,7 @@ class _DaftarAnakBaruState extends State<DaftarAnakBaru> {
                           );
                           return;
                         } else {
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(builder: (context) => Login()),
-                          );
-                        }
-
-
-                        String idOrtu = ortuID;
+                          String idOrtu = ortuID;
                         String idAnak = uid.toString();
                         String hub = dropdownValue.toString();
                         String nama = _controllerNama.text.toString();
@@ -362,6 +355,14 @@ class _DaftarAnakBaruState extends State<DaftarAnakBaru> {
                             ));
                           }
                         });
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(builder: (context) => Login()),
+                          );
+                        }
+
+
+                        
                       }),
                 )
               ],

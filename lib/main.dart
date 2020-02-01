@@ -5,6 +5,7 @@ import 'package:stunting_apps/daftarbaru.dart';
 import 'package:stunting_apps/depan.dart';
 //import 'package:stunting_apps/depanbaru.dart' as prefix0;
 import 'package:stunting_apps/login.dart';
+import 'package:stunting_apps/splash.dart';
 import 'package:stunting_apps/upload.dart';
 import 'package:stunting_apps/video.dart';
 
@@ -15,7 +16,7 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Login(),
+      home: HalamanAwal(),
     );
   }
 }

@@ -1,8 +1,6 @@
-import 'dart:ffi';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:stunting_apps/hasil.dart';
 import 'package:stunting_apps/src/api_service.dart';
 import 'package:stunting_apps/src/model/anak.dart';
 import 'package:stunting_apps/src/model/dtanak.dart';

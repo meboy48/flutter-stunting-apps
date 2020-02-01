@@ -21,7 +21,6 @@ class Upload extends StatefulWidget {
 }
 
 class _UploadState extends State<Upload> {
-  ApiService _apiService = ApiService();
   String id_user='7f544fd2-dbd5-47bf-8bb8-2fadf203c784';
  File _image;
 TextEditingController cTitle = new TextEditingController();

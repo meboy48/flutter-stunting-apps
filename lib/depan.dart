@@ -222,7 +222,7 @@ class MyHomePageState extends State<MyHomePage> {
                         color: Colors.blue,
                         child: new Text("Mulai"),
                         onPressed: () {
-                          Navigator.of(context).push(new MaterialPageRoute(
+                          Navigator.of(context).pushReplacement(new MaterialPageRoute(
                             builder: (BuildContext context) => new Login(),
                           ));
                         })))

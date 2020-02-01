@@ -1,15 +1,10 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stunting_apps/beranda.dart';
 //import 'package:stunting_apps/depanbaru.dart';
 import 'package:stunting_apps/src/api_service.dart';
 import 'package:stunting_apps/daftarbaru.dart';
 import 'package:stunting_apps/src/model/profile.dart';
 import 'package:loading_animations/loading_animations.dart';
-
-final GlobalKey<ScaffoldState> _scaffoldState = GlobalKey<ScaffoldState>();
 
 class Login extends StatefulWidget {
   // Login() : super(key: key);
@@ -20,11 +15,15 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
-  bool _isLoading = false;
   ApiService _apiService = ApiService();
   // bool _isFieldIdValid;
-  bool _isFieldUNameValid;
-  bool _isFieldPassValid;
+  final GlobalKey<ScaffoldState> _scaffoldState = GlobalKey<ScaffoldState>();
+  _showSnackBar(String text) {
+    final snackBar = new SnackBar(
+      content: new Text(text),
+    );
+    _scaffoldState.currentState.showSnackBar(snackBar);
+  }
 
   final TextEditingController _unameController = new TextEditingController();
   final TextEditingController _passwordController = new TextEditingController();
@@ -39,8 +38,7 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
-        //key: _scaffoldState,
+        key: _scaffoldState,
         //appBar: new AppBar(
         //title: Text("STUNTING APPS"),
         //backgroundColor: Colors.pink[300],
@@ -48,9 +46,9 @@ class _LoginState extends State<Login> {
         //  backgroundColor: Colors.blueAccent[100],
         body: Container(
           decoration: BoxDecoration(
-                  image: DecorationImage(
-                image: AssetImage("assets/images/gradient_1.png"),
-                fit: BoxFit.cover)),
+              image: DecorationImage(
+                  image: AssetImage("assets/images/gradient_1.png"),
+                  fit: BoxFit.cover)),
           child: ListView(
             padding: const EdgeInsets.all(16.0),
             children: <Widget>[
@@ -70,9 +68,9 @@ class _LoginState extends State<Login> {
                       child: TextField(
                         controller: _unameController,
                         decoration: InputDecoration(
-                          fillColor: Colors.black,
-                          focusColor: Colors.black,
-                        
+                            fillColor: Colors.black,
+                            focusColor: Colors.black,
+
                             // icon: Icon(
                             // Icons.assignment_ind,
                             // color: Color(0xFF000000),
@@ -150,33 +148,22 @@ class _LoginState extends State<Login> {
                                 username: _unameController.text.toString(),
                                 password: _passwordController.text.toString());
 
-                            final response = _apiService.login(profile);
+                            //final response = _apiService.login(profile);
                             if (_unameController.text.trim().isNotEmpty &&
                                 _passwordController.text.trim().isNotEmpty) {
                               //  setState(() => _isLoading = true);
 
                               _apiService.login(profile).then((value) {
-                                print(value);
+                                // print(value);
 
                                 Pengguna profiles = value.single;
-                                print(profiles.nama);
+                                // print(profiles.nama);
                                 //var dataPeng = _apiService.login(profile);
                                 if (profiles.username !=
                                     _unameController.text.toString()) {
-                                  _scaffoldState.currentState
-                                      .showSnackBar(SnackBar(
-                                    content: Text("Login gagal"),
-                                  ));
-                                  print(profiles);
+                                  _showSnackBar("username tidak ditemukan");
+                                  //print(profiles);
                                 } else {
-                                  LoadingFlipping.circle(
-                                    borderColor: Colors.cyan,
-                                    borderSize: 3.0,
-                                    size: 30.0,
-                                    backgroundColor: Colors.cyanAccent,
-                                    duration: Duration(milliseconds: 500),
-                                  );
-
                                   Navigator.of(context)
                                       .pushReplacement(new MaterialPageRoute(
                                     builder: (BuildContext context) =>
@@ -185,10 +172,8 @@ class _LoginState extends State<Login> {
                                 }
                               });
                             } else {
-                              _scaffoldState.currentState.showSnackBar(SnackBar(
-                                content:
-                                    Text("Username dan Password harus diisi"),
-                              ));
+                              _showSnackBar(
+                                  "username dan password harus diisi");
                             }
                           },
                         ))
